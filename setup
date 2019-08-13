@@ -1,0 +1,3 @@
+#!/bin/bash
+
+$SHELL $(dirname $0)/setup.sh
