@@ -1,3 +1,5 @@
+#!/bin/sh
+
 SHELL=$(basename $SHELL)
 HISTORY_PATH="$HOME/.${SHELL}_history"
 CONFIG_PATH="$HOME/.${SHELL}rc"
@@ -13,6 +15,5 @@ cp $FROM_PATH "$TARGET_PATH/$TARGET_NAME"
 
 echo "export PATH=\$PATH:$HOME/.local" >> $CONFIG_PATH
 echo "$TARGET_NAME" >> $CONFIG_PATH
-source $CONFIG_PATH
 
 mv "$HISTORY_PATH.tmp" $HISTORY_PATH
