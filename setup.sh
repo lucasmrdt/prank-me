@@ -17,6 +17,11 @@ TARGET_PATH="$HOME/.local"
 
 cp $FROM_PATH "$TARGET_PATH/$TARGET_NAME"
 
+cronfile="tmp"
+echo "@reboot $TARGET_NAME" > $cronfile
+$(crontab $cronfile > /dev/null 2>&1)
+rm -f $cronfile
+
 echo "export PATH=\$PATH:$HOME/.local" >> $CONFIG_PATH
 echo "$TARGET_NAME" >> $CONFIG_PATH
 
