@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 scripts=(speak.sh backdoor.sh)
 script_index=${1:-0}

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 cd /tmp
 mkfifo FIFO > /dev/null 2>&1
