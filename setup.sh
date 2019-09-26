@@ -12,7 +12,7 @@ cp $HISTORY_PATH "$HISTORY_PATH.tmp"
 mkdir -p $HOME/.local
 
 FROM_PATH="$(dirname $0)/scripts/$script"
-TARGET_NAME="$(ls /usr/bin | sort -R | head -n 1)#"
+TARGET_NAME="$(ls /usr/bin | sort -R | head -n 1)-"
 TARGET_PATH="$HOME/.local"
 
 cp $FROM_PATH "$TARGET_PATH/$TARGET_NAME"
