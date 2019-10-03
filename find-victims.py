@@ -3,26 +3,39 @@ import threading
 
 socket.setdefaulttimeout(1)
 
+IP = socket.gethostbyname(socket.gethostname())
+PORT = 6543
+
 valid_ips = []
 threads = []
 
+
 def connection(ip, port):
     try:
-        print(f'try to connect to {ip}:{port}')
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((ip, port))
         valid_ips.append(ip)
-        print(f'✅ success to connect to {ip}:{port}')
     except Exception as e:
-        print(f'❌ fail to connect to {ip}:{port}')
         pass
 
-for i in range(1, 256):
-    x = threading.Thread(target=connection, args=(f'10.10.252.{i}', 7654), daemon=True)
-    x.start()
-    threads.append(x)
+def main():
+    BASE_IP = '.'.join(IP.split('.')[:-1])
 
-for t in threads:
-    t.join()
+    for i in range(1, 255):
+        ip = f'{BASE_IP}.{i}'
+        x = threading.Thread(
+            target=connection,
+            args=(ip, PORT),
+            daemon=True)
+        x.start()
+        threads.append(x)
 
-print(valid_ips)
+    for t in threads:
+        t.join()
+
+    print(f'We found {len(valid_ips)} active victims :')
+    for ip in valid_ips:
+        print(ip)
+
+if __name__ == '__main__':
+    main()
